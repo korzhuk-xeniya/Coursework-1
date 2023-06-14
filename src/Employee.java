@@ -42,4 +42,6 @@ public class Employee {
     public String toString() {
         return fio.toString() + " Отдел: " + department + " Зарплата: " + salary + " ID: " + id;
     }
+    public int payForMonth
+
 }
