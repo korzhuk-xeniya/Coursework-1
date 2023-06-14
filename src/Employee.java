@@ -3,14 +3,15 @@ public class Employee {
     private int department;
     private int salary;
     private int id;
-    Counter idCounter = new Counter();
+
+    public static int idCounter = 0;
 
     public Employee(FIO fio, int department, int salary) {
         this.fio = fio;
         this.department = department;
         this.salary = salary;
-        this.id = idCounter.getCount();
-        idCounter.increment();
+        this.id = idCounter;
+        idCounter++;
     }
 
     public FIO getFio() {
@@ -35,5 +36,10 @@ public class Employee {
 
     public void setSalary(int salary) {
         this.salary = salary;
+    }
+
+    @Override
+    public String toString() {
+        return fio.toString() + " Отдел: " + department + " Зарплата: " + salary + " ID: " + id;
     }
 }
