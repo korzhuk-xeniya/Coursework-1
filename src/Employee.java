@@ -42,6 +42,13 @@ public class Employee {
     public String toString() {
         return fio.toString() + " Отдел: " + department + " Зарплата: " + salary + " ID: " + id;
     }
-    public int payForMonth
+//    public static int payForMonth (Employee[] employees){
+//        int sum = 0;
+//        for (int cell = 0; cell < employees.length; cell++) {
+//            sum += employees[cell].getSalary();
+//        }
+//        return sum;
+    }
 
-}
+
+

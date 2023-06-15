@@ -1,4 +1,23 @@
 public class Main {
+    public static String payForMonth(Employee[] employees) {
+        int sum = 0;
+        for (int cell = 0; cell < employees.length; cell++) {
+            sum += employees[cell].getSalary();
+        }
+        return "Сумма затрат на зарплаты в месяц: " + sum;
+    }
+    public static String findMinSalary (Employee[ ]employees) {
+        int minSalary = employees[0].getSalary();
+        FIO fio = employees[0].getFio();
+        for (int cell = 0; cell < employees.length; cell++) {
+            if (employees[cell].getSalary()<minSalary) {
+                minSalary = employees[cell].getSalary();
+                fio = employees[cell].getFio();
+            }
+        }
+        return "Сотрудник с минимальной зарплатой - "+ minSalary+": " + fio;
+    }
+    public static String
     public static void main(String[] args) {
         FIO iii = new FIO("Иванов", "Иван", "Иванович");
         FIO ppp = new FIO("Петров", "Пётр", "Петрович");
@@ -22,8 +41,7 @@ public class Main {
         Employee designer = new Employee(tds, 5, 75_000);
         Employee artDirector = new Employee(mtv, 5, 150_000);
 
-        Employee[] employees;
-        employees = new Employee[10];
+        Employee[] employees = new Employee[10];
         employees[0] = director;
         employees[1] = secretary;
         employees[2] = accountant;
@@ -37,6 +55,10 @@ public class Main {
         for (int i = 0; i < employees.length; i++) {
             System.out.println(employees[i]);
         }
+
+        System.out.println(payForMonth(employees));
+        System.out.println(findMinSalary(employees));
     }
 }
+
 
