@@ -1,23 +1,41 @@
 public class Main {
-    public static String payForMonth(Employee[] employees) {
+    public static int countSumPayForMonth(Employee[] employees) {
         int sum = 0;
         for (int cell = 0; cell < employees.length; cell++) {
             sum += employees[cell].getSalary();
         }
-        return "Сумма затрат на зарплаты в месяц: " + sum;
+        return sum;
     }
-    public static String findMinSalary (Employee[ ]employees) {
+
+    public static String findMinSalary(Employee[] employees) {
         int minSalary = employees[0].getSalary();
         FIO fio = employees[0].getFio();
         for (int cell = 0; cell < employees.length; cell++) {
-            if (employees[cell].getSalary()<minSalary) {
+            if (employees[cell].getSalary() < minSalary) {
                 minSalary = employees[cell].getSalary();
                 fio = employees[cell].getFio();
             }
         }
-        return "Сотрудник с минимальной зарплатой - "+ minSalary+": " + fio;
+        return "Сотрудник с минимальной зарплатой - " + minSalary + ": " + fio;
     }
-    public static String
+
+    public static String findMaxSalary(Employee[] employees) {
+        int maxSalary = employees[0].getSalary();
+        FIO fio = employees[0].getFio();
+        for (int cell = 0; cell < employees.length; cell++) {
+            if (employees[cell].getSalary() > maxSalary) {
+                maxSalary = employees[cell].getSalary();
+                fio = employees[cell].getFio();
+            }
+        }
+        return "Сотрудник с максимальной зарплатой - " + maxSalary + ": " + fio;
+    }
+
+    public static float countAverageValueOfSalaries(Employee[] employees) {
+        float averageSalary = (float)countSumPayForMonth(employees)/ employees.length;
+        return averageSalary;
+    }
+
     public static void main(String[] args) {
         FIO iii = new FIO("Иванов", "Иван", "Иванович");
         FIO ppp = new FIO("Петров", "Пётр", "Петрович");
@@ -56,8 +74,10 @@ public class Main {
             System.out.println(employees[i]);
         }
 
-        System.out.println(payForMonth(employees));
+        System.out.println("Сумма затрат на зарплаты в месяц: " + countSumPayForMonth(employees));
         System.out.println(findMinSalary(employees));
+        System.out.println(findMaxSalary(employees));
+        System.out.println("Среднее значение зарплат: " + countAverageValueOfSalaries(employees));
     }
 }
 
