@@ -1,3 +1,6 @@
+import java.lang.reflect.Array;
+import java.util.Arrays;
+
 public class Main {
     public static int countSumPayForMonth(Employee[] employees) {
         int sum = 0;
@@ -32,8 +35,16 @@ public class Main {
     }
 
     public static float countAverageValueOfSalaries(Employee[] employees) {
-        float averageSalary = (float)countSumPayForMonth(employees)/ employees.length;
+        float averageSalary = (float) countSumPayForMonth(employees) / employees.length;
         return averageSalary;
+    }
+
+    public static String writeFullNames (Employee[]employees) {
+        FIO []fio = new FIO[employees.length];
+        for (int cell = 0; cell < employees.length; cell++) {
+            fio[cell] = employees[cell].getFio();
+        }
+        return Arrays.toString(fio);
     }
 
     public static void main(String[] args) {
@@ -78,6 +89,7 @@ public class Main {
         System.out.println(findMinSalary(employees));
         System.out.println(findMaxSalary(employees));
         System.out.println("Среднее значение зарплат: " + countAverageValueOfSalaries(employees));
+        System.out.println(writeFullNames(employees));
     }
 }
 
