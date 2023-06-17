@@ -4,7 +4,7 @@ public class Employee {
     private int salary;
     private int id;
 
-    public static int idCounter = 0;
+    private static int idCounter = 0;
 
     public Employee(FIO fio, int department, int salary) {
         this.fio = fio;
@@ -42,6 +42,8 @@ public class Employee {
     public String toString() {
         return fio.toString() + " Отдел: " + department + " Зарплата: " + salary + " ID: " + id;
     }
+
+
 //    public static int payForMonth (Employee[] employees){
 //        int sum = 0;
 //        for (int cell = 0; cell < employees.length; cell++) {

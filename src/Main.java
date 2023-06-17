@@ -1,4 +1,3 @@
-import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -106,6 +105,95 @@ public class Main {
         return fio;
     }
 
+    public static int countAmountOfSalaryCostsByDepartment(int department, Employee[] employees) {
+        int amountOfSalaryCostsByDepartment = 0;
+        for (int cell = 0; cell < employees.length; cell++) {
+            if (employees[cell].getDepartment() == department) {
+                amountOfSalaryCostsByDepartment += employees[cell].getSalary();
+            }
+        }
+        return amountOfSalaryCostsByDepartment;
+    }
+
+    public static float countAverageSalaryByDepartment(int department, Employee[] employees) {
+        float averageSalaryByDepartment = 0;
+        int count = 0;
+        for (int cell = 0; cell < employees.length; cell++) {
+            if (employees[cell].getDepartment() == department) {
+                count++;
+                averageSalaryByDepartment = (float) countAmountOfSalaryCostsByDepartment(department, employees) / count;
+            }
+        }
+        return averageSalaryByDepartment;
+    }
+
+    public static int countEmployeesInDepartment(int department, Employee[] employees) {
+        int count = 0;
+        for (int cell = 0; cell < employees.length; cell++) {
+            if (employees[cell].getDepartment() == department) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    public static void increaseSalaryInDepartment(int department, Employee[] employees, int percent) {
+        for (int cell = 0; cell < employees.length; cell++) {
+            if (employees[cell].getDepartment() == department) {
+                employees[cell].setSalary(employees[cell].getSalary() + employees[cell].getSalary() * percent / 100);
+            }
+        }
+    }
+
+    public static String writeEmployeesOfDepartment(int department, Employee[] employees) {
+        String[] employeesOfDepartment = new String[countEmployeesInDepartment(department, employees)];
+        int employee = 0;
+        for (int cell = 0; cell < employees.length; cell++) {
+            if (employees[cell].getDepartment() == department) {
+                employeesOfDepartment[employee] = employees[cell].getFio() + " Зарплата: " + employees[cell].getSalary() + " ID: " + employees[cell].getId();
+                employee++;
+            }
+        }
+        return Arrays.toString(employeesOfDepartment);
+    }
+
+
+    public static String getEmployeesWithSalaryLessDigit(int digit, Employee[] employees) {
+        int count = 0;
+
+        for (int cell = 0; cell < employees.length; cell++) {
+            if (employees[cell].getSalary() < digit) {
+                count++;
+            }
+        }
+        String[] employeesWithSalaryLessDigit = new String[count];
+        int i = 0;
+        for (int cell = 0; cell < employees.length; cell++) {
+            if (employees[cell].getSalary() < digit) {
+                employeesWithSalaryLessDigit[i] = " ID: " + employees[cell].getId() + " " + employees[cell].getFio() + " Зарплата: " + employees[cell].getSalary();
+                i++;
+            }
+        }
+        return Arrays.toString(employeesWithSalaryLessDigit);
+    }
+    public static String getEmployeesWithSalaryMoreDigit(int digit, Employee[] employees) {
+        int count = 0;
+
+        for (int cell = 0; cell < employees.length; cell++) {
+            if (employees[cell].getSalary() >= digit) {
+                count++;
+            }
+        }
+        String[] employeesWithSalaryMoreDigit = new String[count];
+        int i = 0;
+        for (int cell = 0; cell < employees.length; cell++) {
+            if (employees[cell].getSalary() >= digit) {
+                employeesWithSalaryMoreDigit[i] = " ID: " + employees[cell].getId() + " " + employees[cell].getFio() + " Зарплата: " + employees[cell].getSalary();
+                i++;
+            }
+        }
+        return Arrays.toString(employeesWithSalaryMoreDigit);
+    }
     public static void main(String[] args) {
         FIO iii = new FIO("Иванов", "Иван", "Иванович");
         FIO ppp = new FIO("Петров", "Пётр", "Петрович");
@@ -159,10 +247,16 @@ public class Main {
         if (department > 0 && department <= 5) {
             System.out.println("Сотрудник с минимальной зарплатой в " + department + " отделе: " + findEmployeeWithMinSalaryInDepartment(department, employees));
             System.out.println("Сотрудник с максимальной зарплатой в " + department + " отделе: " + findEmployeeWithMaxSalaryInDepartment(department, employees));
+            System.out.println("Сумма затрат на зарплату в " + department + " отделе: " + countAmountOfSalaryCostsByDepartment(department, employees));
+            System.out.println("Средняя зарплата в " + department + " отделе: " + countAverageSalaryByDepartment(department, employees));
+            increaseSalaryInDepartment(department, employees, 5);
+            System.out.println("Сотрудники " + department + " отдела: " + writeEmployeesOfDepartment(department, employees));
         } else {
             System.out.println("Такого отдела не существует");
-        }
 
+        }
+        System.out.println("Сотрудники с зарплатой меньше 100_000 " + getEmployeesWithSalaryLessDigit(100_000, employees));
+        System.out.println("Сотрудники с зарплатой больше 100_000 " + getEmployeesWithSalaryMoreDigit(100_000, employees));
     }
 }
 
