@@ -20,29 +20,6 @@ public class Main {
         return employeeWithMinSalary;
     }
 
-    public static FIO findFioEmployeeWithMinSalary(Employee[] employees) {
-        int minSalary = employees[0].getSalary();
-        FIO fio = employees[0].getFio();
-        for (int cell = 0; cell < employees.length; cell++) {
-            if (employees[cell].getSalary() < minSalary) {
-                minSalary = employees[cell].getSalary();
-                fio = employees[cell].getFio();
-            }
-        }
-        return fio;
-    }
-
-    public static int findMinSalary(Employee[] employees) {
-        int minSalary = employees[0].getSalary();
-        FIO fio = employees[0].getFio();
-        for (int cell = 0; cell < employees.length; cell++) {
-            if (employees[cell].getSalary() < minSalary) {
-                minSalary = employees[cell].getSalary();
-                fio = employees[cell].getFio();
-            }
-        }
-        return minSalary;
-    }
 
     public static Employee findEmployeeWithMaxSalary(Employee[] employees) {
         Employee employeeWithMaxSalary = employees[0];
@@ -52,30 +29,6 @@ public class Main {
             }
         }
         return employeeWithMaxSalary;
-    }
-
-    public static FIO findFioEmployeeWithMaxSalary(Employee[] employees) {
-        int maxSalary = employees[0].getSalary();
-        FIO fio = employees[0].getFio();
-        for (int cell = 0; cell < employees.length; cell++) {
-            if (employees[cell].getSalary() > maxSalary) {
-                maxSalary = employees[cell].getSalary();
-                fio = employees[cell].getFio();
-            }
-        }
-        return fio;
-    }
-
-    public static int findMaxSalary(Employee[] employees) {
-        int maxSalary = employees[0].getSalary();
-        FIO fio = employees[0].getFio();
-        for (int cell = 0; cell < employees.length; cell++) {
-            if (employees[cell].getSalary() > maxSalary) {
-                maxSalary = employees[cell].getSalary();
-                fio = employees[cell].getFio();
-            }
-        }
-        return maxSalary;
     }
 
     public static float countAverageValueOfSalaries(Employee[] employees) {
@@ -97,32 +50,28 @@ public class Main {
         }
     }
 
-    public static FIO findEmployeeWithMinSalaryInDepartment(int department, Employee[] employees) {
-        int minSalaryInDepartment = findMaxSalary(employees);
-        FIO fio = findFioEmployeeWithMaxSalary(employees);
+    public static Employee findEmployeeWithMinSalaryInDepartment(int department, Employee[] employees) {
+        Employee employeeWithMinSalaryInDepartment = findEmployeeWithMaxSalary(employees);
         for (int cell = 0; cell < employees.length; cell++) {
             if (employees[cell].getDepartment() == department) {
-                if (employees[cell].getSalary() < minSalaryInDepartment) {
-                    minSalaryInDepartment = employees[cell].getSalary();
-                    fio = employees[cell].getFio();
+                if (employees[cell].getSalary() < employeeWithMinSalaryInDepartment.getSalary()) {
+                    employeeWithMinSalaryInDepartment = employees[cell];
                 }
             }
         }
-        return fio;
+        return employeeWithMinSalaryInDepartment;
     }
 
-    public static FIO findEmployeeWithMaxSalaryInDepartment(int department, Employee[] employees) {
-        int maxSalaryInDepartment = findMinSalary(employees);
-        FIO fio = findFioEmployeeWithMinSalary(employees);
+    public static Employee findEmployeeWithMaxSalaryInDepartment(int department, Employee[] employees) {
+        Employee employeeWithMaxSalaryInDepartment = findEmployeeWithMinSalary(employees);
         for (int cell = 0; cell < employees.length; cell++) {
             if (employees[cell].getDepartment() == department) {
-                if (employees[cell].getSalary() > maxSalaryInDepartment) {
-                    maxSalaryInDepartment = employees[cell].getSalary();
-                    fio = employees[cell].getFio();
+                if (employees[cell].getSalary() > employeeWithMaxSalaryInDepartment.getSalary()) {
+                    employeeWithMaxSalaryInDepartment = employees[cell];
                 }
             }
         }
-        return fio;
+        return employeeWithMaxSalaryInDepartment;
     }
 
     public static int countAmountOfSalaryCostsByDepartment(int department, Employee[] employees) {
@@ -135,18 +84,6 @@ public class Main {
         return amountOfSalaryCostsByDepartment;
     }
 
-    public static float countAverageSalaryByDepartment(int department, Employee[] employees) {
-        float averageSalaryByDepartment = 0;
-        int count = 0;
-        for (int cell = 0; cell < employees.length; cell++) {
-            if (employees[cell].getDepartment() == department) {
-                count++;
-                averageSalaryByDepartment = (float) countAmountOfSalaryCostsByDepartment(department, employees) / count;
-            }
-        }
-        return averageSalaryByDepartment;
-    }
-
     public static int countEmployeesInDepartment(int department, Employee[] employees) {
         int count = 0;
         for (int cell = 0; cell < employees.length; cell++) {
@@ -155,6 +92,12 @@ public class Main {
             }
         }
         return count;
+    }
+
+    public static float countAverageSalaryByDepartment(int department, Employee[] employees) {
+        float averageSalaryByDepartment = 0;
+        averageSalaryByDepartment = (float) countAmountOfSalaryCostsByDepartment(department, employees) / countEmployeesInDepartment(department, employees);
+        return averageSalaryByDepartment;
     }
 
     public static void increaseSalaryInDepartment(int department, Employee[] employees, int percent) {
